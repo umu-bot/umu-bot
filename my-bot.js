@@ -90,7 +90,7 @@ client.on('ready', () => {
     })
     
     let generalChannel = client.channels.cache.get("732713640657944588"); // Replace with known channel ID
-    generalChannel.send("Joseph is gay!");
+    generalChannel.send("HELLOOOO!");
 
     
     // Provide a URL to a file
