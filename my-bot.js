@@ -34,7 +34,7 @@ function helpCommand(arguments, receivedMessage) {
     if (arguments.length > 0 ) {
         receivedMessage.channel.send("UMIE UMIE " + arguments);
     } else {
-        receivedMessage.channel.send("UMU UMU");
+        receivedMessage.channel.send("UMU UMU UMU");
     }
 }
 
