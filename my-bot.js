@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const axios = require('axios');
+const config = require('./config.json');
 const client = new Discord.Client();
 
 // Dynamically fetch command components from folder
@@ -37,35 +37,28 @@ function processCommand(receivedMessage) {
         return;
     }
 
-    // fetch command from the command list and run it
+    // fetch command from the command list and execute it
     const command = client.commands.get(commandName);
+
+    // check if commands that require arguments have arguments
+    if (command.args && !arguments.length) {
+        let reply = "Extra input required.";
+
+        if (command.usage) {
+            reply += `\nProper usage: \`!${command.name} ${command.usage}\``;
+        }
+        return receivedMessage.channel.send(reply);
+    }
+
     try {
         command.execute(receivedMessage, arguments);
     } catch (error) {
         console.error(error);
         receivedMessage.reply('oopsie woopsie');
     }
-    
-    // if (primaryCommand == "help") {
-    //     helpCommand(arguments, receivedMessage)
-    // } else if (primaryCommand == "multiply") {
-    //     client.commands.get('multiply').execute(receivedMessage, arguments);
-    // } else if (primaryCommand == "weather") {
-    //     client.commands.get('weather').execute(receivedMessage, arguments);
-    // } else if (primaryCommand == "test") {
-    //     client.commands.get('test').execute(receivedMessage, arguments);
-    // } else {
-    //     receivedMessage.channel.send("SCHLABA SCHLEEBEE use !help or !multiply");
-    // }
 }
 
-function helpCommand(arguments, receivedMessage) {
-    if (arguments.length > 0 ) {
-        receivedMessage.channel.send("UMIE UMIE " + arguments);
-    } else {
-        receivedMessage.channel.send("UMU UMU UMU");
-    }
-}
+// }
 
 client.on('ready', () => {
     // List servers the bot is connected to
@@ -90,6 +83,4 @@ client.on('ready', () => {
 
 })
 
-bot_secret_token = "NzMyNzE0MDA1MjYwNjY0ODMy.Xw4npA.xrQsgnRdimaVUdh8qOzEk0om3j8";
-
-client.login(bot_secret_token);
+client.login(config.token);

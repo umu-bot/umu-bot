@@ -1,9 +1,12 @@
 const axios = require('axios');
-const weather_key = "e05ef843b55687fd7c552a1847e6c05f";
+const config = require('../config.json');
+const weather_key = config.weather_key;
 
 module.exports = {
     name: 'weather',
     description: 'Gets the current weather for a given location',
+    args: true,
+    usage: '<city>',
     execute (message, args) {
         if (args.length > 0) {
             // capitaliza city name
@@ -25,9 +28,6 @@ module.exports = {
                 message.reply(`Enter a valid city name! ${error}`);
             })
             message.channel.send("Your city is: " + cityName);
-        }
-        else {
-            message.channel.send("Please enter a city (eg. !weather Toronto)");
         }
     }
 }
