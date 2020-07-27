@@ -3,6 +3,7 @@ module.exports = {
     description: 'Multiplies inputs',
     args: true,
     usage: '<num1> <num2> ...',
+    path: __filename,
     execute (message, args) {
         if (args.length < 2) {
             message.channel.send("Not enough values to multiply. Try `!multiply 2 4 10` or `!multiply 5.2 7`")

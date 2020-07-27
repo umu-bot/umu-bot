@@ -3,15 +3,22 @@ const config = require('./config.json');
 const client = new Discord.Client();
 
 // Dynamically fetch command components from folder
-const fs = require('fs');
+const { readdirSync } = require('fs');
 client.commands = new Discord.Collection();
 
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-
-for (const file of commandFiles) {
-    const command = require(`./commands/${file}`);
-    client.commands.set(command.name, command);
+const load = (dir = "./commands/") => {
+    // searches each folder in commands
+    readdirSync(dir).forEach(dirs => {
+        // adds all command components from subfolder
+        const commandFiles = readdirSync(`${dir}${dirs}/`).filter(file => file.endsWith(".js"));
+        for (const file of commandFiles) {
+            const command = require(`${dir}${dirs}/${file}`);
+            client.commands.set(command.name, command);
+        }
+    })
 }
+
+load();
 
 client.on('message', (receivedMessage) => {
     // Prevent bot from responding to its own messages

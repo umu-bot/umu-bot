@@ -2,6 +2,7 @@ module.exports = {
     name: 'help',
     description: 'SCHLABA SCHLEEBEE',
     usage: '<command name>',
+    path: __filename,
     execute (message, args) {
         const help = [];
         const { commands } = message.client;
