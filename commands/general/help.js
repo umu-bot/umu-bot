@@ -3,7 +3,7 @@ module.exports = {
     description: 'SCHLABA SCHLEEBEE',
     usage: '<command name>',
     path: __filename,
-    execute (message, args) {
+    execute (message, args, ops) {
         const help = [];
         const { commands } = message.client;
         // sends a list of commands

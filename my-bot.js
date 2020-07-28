@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const config = require('./config.json');
 const client = new Discord.Client();
+const queue = new Map();
 
 // Dynamically fetch command components from folder
 const { readdirSync } = require('fs');
@@ -33,8 +34,8 @@ client.on('message', (receivedMessage) => {
 
 function processCommand(receivedMessage) {
     let fullCommand = receivedMessage.content.substr(1); // Remove the leading exclamation mark
-    let splitCommand = fullCommand.split(" "); // Split the message up in to pieces for each space
-    let commandName = splitCommand[0].toLowerCase(); // The first word directly after the exclamation is the command
+    let splitCommand = fullCommand.toLowerCase().split(" "); // Split the message up in to pieces for each space
+    let commandName = splitCommand[0]; // The first word directly after the exclamation is the command
     let arguments = splitCommand.slice(1); // All other words are arguments/parameters/options for the command
 
 
@@ -57,8 +58,12 @@ function processCommand(receivedMessage) {
         return receivedMessage.channel.send(reply);
     }
 
+    let ops = {
+        queue: queue,
+    }
+
     try {
-        command.execute(receivedMessage, arguments);
+        command.execute(receivedMessage, arguments, ops);
     } catch (error) {
         console.error(error);
         receivedMessage.reply('oopsie woopsie');

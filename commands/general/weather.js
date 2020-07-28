@@ -1,6 +1,6 @@
 const axios = require('axios');
-const config = require('../../config.json');
-const weather_key = config.weather_key;
+const { weather_api_key } = require('../../config.json');
+const weather_key = weather_api_key;
 
 module.exports = {
     name: 'weather',
@@ -8,14 +8,12 @@ module.exports = {
     args: true,
     usage: '<city>',
     path: __filename,
-    execute (message, args) {
+    execute (message, args, ops) {
         if (args.length > 0) {
-            // capitaliza city name
-            args = args.map(function(string){
+            // capitalize city name and join if more than one word
+            let cityName = args.map(function(string){
                 return string.charAt(0).toUpperCase() + string.slice(1);
-            });
-            // combine city names with more than one word from args
-            let cityName = args.join(" ");
+            }).join(" ");
 
             axios
             .get(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${weather_key}`)
