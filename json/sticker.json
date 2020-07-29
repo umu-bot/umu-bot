@@ -1,0 +1,43 @@
+[
+    {
+        "name": ["hello", "greetings"],
+        "img": [
+            "https://media1.tenor.com/images/f3b35bcf93b80763baddfc2d7bd3f256/tenor.gif",
+            "https://media1.tenor.com/images/26bb54150f0c4e7fa39f3f8b2fdec295/tenor.gif"
+        ]
+    },
+    {
+        "name": ["happy", "yay"],
+        "img": [
+            "https://media1.tenor.com/images/29d0e16223537d03cead2914a3c309f8/tenor.gif",
+            "https://media1.tenor.com/images/620effbb144cf8483a2b94930224b6da/tenor.gif",
+            "https://media1.tenor.com/images/d0898625c2ce480cc0b1f8230f353421/tenor.gif",
+            "https://media1.tenor.com/images/973c22858e1a38243a5fec389608abca/tenor.gif",
+            "https://media1.tenor.com/images/a1be883c660797498a8f294edfee5e4d/tenor.gif"
+        ]
+    },
+    {
+        "name": ["sad", "cry"],
+        "img": [
+            "https://media1.tenor.com/images/2f5216236dbe79052fa06e7a111ccb8a/tenor.gif"
+        ]
+    },
+    {
+        "name": ["love"],
+        "img": [
+            "https://media1.tenor.com/images/8d793e18fb27edd6c885ed7de79e51a4/tenor.gif",
+            "https://media1.tenor.com/images/1d975c07237d342c66466ae4319efdb6/tenor.gif",
+            "https://media1.tenor.com/images/338b69ce203fa9eaf13a4a3c4933e97b/tenor.gif",
+            "https://media1.tenor.com/images/64440ffa1c0565a4af9b3ecb7fe80b1c/tenor.gif"
+        ]
+    },
+    {
+        "name": ["sleep"],
+        "img": [
+            "https://media1.tenor.com/images/d8b7f20a12a04926bce73660e8009c6a/tenor.gif",
+            "https://media1.tenor.com/images/72255849efbad19978991ea038979c21/tenor.gif",
+            "https://media1.tenor.com/images/9083b085a0cd157036049fd8a6eb33aa/tenor.gif",
+            "https://media1.tenor.com/images/87ac189500fd4d029c617c591505c39f/tenor.gif"
+        ]
+    }
+]
