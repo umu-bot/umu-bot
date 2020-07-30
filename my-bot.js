@@ -45,7 +45,7 @@ function processCommand(receivedMessage) {
         return;
     }
 
-    // fetch command from the command list and execute it
+    // fetch command from the command list
     const command = client.commands.get(commandName);
 
     // check if commands that require arguments have arguments

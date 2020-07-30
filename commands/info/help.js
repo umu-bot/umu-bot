@@ -24,8 +24,9 @@ module.exports = {
 
         help.push (`**Name: **${command.name}`);
         
-        if (command.description) help.push(`**Description: **${command.description}`);
-        if (command.usage) help.push(`**Usage: **!${command.name} ${command.usage}`);
+        if (command.description) help.push(`**Description:** ${command.description}`);
+        if (command.usage) help.push(`**Usage:** \`!${command.name} ${command.usage}\``);
+        if (command.extras) help.push(`**Extra inputs:** \`${command.extras}\``);
 
         message.channel.send(help);
     }
