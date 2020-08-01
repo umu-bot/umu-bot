@@ -9,6 +9,7 @@ module.exports = {
     description: 'Plays music',
     args: true,
     usage: '<song name/URL>',
+    caseSensitive: true,
     path: __filename,
     async execute (message, args, ops) {
         const voiceChannel = message.member.voice.channel;
@@ -19,14 +20,19 @@ module.exports = {
 
         const query = args.join(" ");
 
-        // checks for YT playlist URL (query.match(/^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+/)) {
+        // checks for YT playlist URL
+        // /^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)\/playlist(.*)+/
+        // /^(?!.*\?.*\bv=)https:\/\/www\.youtube\.com\/.*\?.*\blist=.*$/
         if (query.match(/^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)\/playlist(.*)+/)) {
             const playlist = await youtube.getPlaylist(query);
             const videos = await playlist.getVideos();
 
+            message.channel.send (`**Adding \`${playlist.length}\` songs...**`);
+
             for (const video of Object.values(videos)) {
                 const currentVideo = await youtube.getVideoByID(video.id);
                 await videoFn (currentVideo, message, voiceChannel, true);
+                console.log("A");
             }
 
             return message.channel.send (`**Playlist \`${playlist.title}\` has been added to the queue.**`);            
@@ -51,14 +57,13 @@ module.exports = {
         // gets info from video and adds to queue
         async function videoFn (video, message, channel, playlist = false) {
             const serverQueue = ops.queue.get(message.guild.id);
-            const songInfo = await ytdl.getInfo(video.id);
+            // const songInfo = await ytdl.getInfo(video.id);
             const song = {
                 id: video.id,
                 title: video.title,
                 url: `https://www.youtube.com/watch?v=${video.id}`,
                 thumbnail: `https://i.ytimg.com/vi/${video.id}/maxresdefault.jpg`,
-                duration: video.duration,
-                time: songInfo.videoDetails.lengthSeconds
+                duration: video.duration
             };
 
             if (serverQueue) {
@@ -116,12 +121,19 @@ module.exports = {
                 })
                 .on('error', error => console.error(error));
 
+            let duration = [];
+            for (let key in song.duration) {
+                if (song.duration[key])
+                duration.push(song.duration[key]);
+            }
+            duration = duration.join(":");
+
             const embed = new MessageEmbed()
                 .setColor("GREEN")
                 .setTitle('Now Playing\n')
                 .setThumbnail(song.thumbnail)
                 .setTimestamp()
-                .setDescription(`Now playing:\n **${song.title}**\n\nSong Length: **${Math.floor(song.time / 60)}:${song.time % 60}**`)
+                .setDescription(`Now playing:\n **${song.title}**\n\nSong Length: **${duration}**`)
                 .setFooter(message.member.displayName, message.author.displayAvatarURL());
             queue.textChannel.send(embed);
         }

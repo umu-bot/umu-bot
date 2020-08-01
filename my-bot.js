@@ -34,8 +34,8 @@ client.on('message', (receivedMessage) => {
 
 function processCommand(receivedMessage) {
     let fullCommand = receivedMessage.content.substr(1); // Remove the leading exclamation mark
-    let splitCommand = fullCommand.toLowerCase().split(" "); // Split the message up in to pieces for each space
-    let commandName = splitCommand[0]; // The first word directly after the exclamation is the command
+    let splitCommand = fullCommand.split(" "); // Split the message up in to pieces for each space
+    let commandName = splitCommand[0].toLowerCase(); // The first word directly after the exclamation is the command
     let arguments = splitCommand.slice(1); // All other words are arguments/parameters/options for the command
 
 
@@ -56,6 +56,11 @@ function processCommand(receivedMessage) {
             reply += `\nProper usage: \`!${command.name} ${command.usage}\``;
         }
         return receivedMessage.channel.send(reply);
+    }
+
+    // checks if args are case sensitive (ex. certain URLs and file names)
+    if (!command.caseSensitive) {
+        arguments = arguments.map (arg => arg.toLowerCase());
     }
 
     let ops = {
