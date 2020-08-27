@@ -5,7 +5,7 @@ module.exports = {
     name: 'umu',
     description: 'umie umie',
     path: __filename,
-    execute (message, args, ops) {
+    execute (message, args) {
 
         // sends a random sticker if no arguments
         if (!args.length) {

@@ -100,4 +100,7 @@ client.on('ready', () => {
 
 })
 
+// UnhandledPromiseRejectionWarnings
+process.on('unhandledRejection', error => console.error('Uncaught Promise Rejection', error));
+
 client.login(config.token);

@@ -6,7 +6,7 @@ module.exports = {
     description: 'Rolls dice',
     usage: '<number>',
     path: __filename,
-    async execute(message, args, ops) {
+    async execute(message, args) {
 
         const colors = ['r', 'o', 'y', 'g', 'b', 'p'];
         const defaultWidth = 85;

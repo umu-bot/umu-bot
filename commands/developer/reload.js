@@ -4,7 +4,7 @@ module.exports = {
     args: true,
     usage: '<command>',
     path: __filename,
-    execute(message, args, ops) {
+    execute(message, args) {
         const commandName = args[0].toLowerCase();
         const command = message.client.commands.get(commandName);
         if (!command) return message.channel.send(`The command \`${commandName}\`doesn't exist.`);
