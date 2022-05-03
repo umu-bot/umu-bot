@@ -26,7 +26,7 @@ client.on('message', (receivedMessage) => {
     if (receivedMessage.author == client.user) {
         return
     }
-    
+
     if (receivedMessage.content.startsWith("!")) {
         processCommand(receivedMessage)
     }
@@ -60,7 +60,7 @@ function processCommand(receivedMessage) {
 
     // checks if args are case sensitive (ex. certain URLs and file names)
     if (!command.caseSensitive) {
-        arguments = arguments.map (arg => arg.toLowerCase());
+        arguments = arguments.map(arg => arg.toLowerCase());
     }
 
     let ops = {
@@ -89,11 +89,11 @@ client.on('ready', () => {
 
         })
     })
-    
-    let generalChannel = client.channels.cache.get("732713640657944588"); // Replace with known channel ID
+
+    let generalChannel = client.channels.cache.get("659132704251445259"); // Replace with known channel ID
     generalChannel.send("HELLOOOO!");
 
-    
+
     // Provide a URL to a file
     const webAttachment = new Discord.MessageAttachment('https://i.imgur.com/9QamQDE.gif');
     generalChannel.send(webAttachment);
